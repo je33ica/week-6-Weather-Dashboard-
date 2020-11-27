@@ -73,7 +73,7 @@ $.ajax({
 
 
 //use this one for the weather forcast 
- var forcastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}`
+ var forcastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`
  $.ajax({
   url: forcastURL,
   method: "GET"
@@ -81,8 +81,9 @@ $.ajax({
 // need long and lat to make UV api call
   var temp = response.list[0].main.temp
   //var icon = response
-console.log( temp) } )
+console.log( "I am the temp " + temp +"°celsius") } )
 
 // list.dt.weather.id.icon
 // list .dt .main.temp
 // list.dt.wind. speed 
+
