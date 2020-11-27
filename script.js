@@ -50,7 +50,7 @@ $.ajax({
     dataType: "json",
   }).then(function (response) {
      // response from UV api call but how do i make that a UV reading ?
-    console.log(response.value)})
+    console.log("im a lil UV bitch " + response.value)})
 // appears in console but not on page( well undefined)because it's a lil bitch!
     $("#UV-index").text("UV Index: " + response.value)
    //badges for UV ratings- low,warning,high
@@ -78,13 +78,14 @@ $.ajax({
   url: forcastURL,
   method: "GET"
 }).then(function (response) {
-// need long and lat to make UV api call
+
   var temp = response.list[0].main.temp
   var icon = response.list[1].weather[0].icon
-  //var icon = response
+  var windSpeed = response.list[0].wind.speed
+  var humidity = response.list[0].main.humidity
+  //console logs to check file paths
 console.log( "I am the temp " + temp +"°celsius") 
-console.log('i am the weather icon ' + icon) ;
-// list.dt.weather.id.icon
-// list .dt .main.temp
-// list.dt.wind. speed 
+console.log('i am the weather icon ' + icon)
+console.log('I am the speed of the wind ' + windSpeed + "mph"); ;
+console.log('I am the humidity ' + humidity + "%");
 } )
