@@ -79,11 +79,13 @@ $.ajax({
   method: "GET"
 }).then(function (response) {
 
+  var cityName = response.city.name
   var temp = response.list[0].main.temp
   var icon = response.list[1].weather[0].icon
   var windSpeed = response.list[0].wind.speed
   var humidity = response.list[0].main.humidity
   //console logs to check file paths
+  console.log('I am the city ' + cityName);
 console.log( "I am the temp " + temp +"°celsius") 
 console.log('i am the weather icon ' + icon)
 console.log('I am the speed of the wind ' + windSpeed + "mph"); ;
