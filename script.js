@@ -80,10 +80,11 @@ $.ajax({
 }).then(function (response) {
 // need long and lat to make UV api call
   var temp = response.list[0].main.temp
+  var icon = response.list[1].weather[0].icon
   //var icon = response
-console.log( "I am the temp " + temp +"°celsius") } )
-
+console.log( "I am the temp " + temp +"°celsius") 
+console.log('i am the weather icon ' + icon) ;
 // list.dt.weather.id.icon
 // list .dt .main.temp
 // list.dt.wind. speed 
-
+} )
