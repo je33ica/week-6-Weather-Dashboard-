@@ -28,29 +28,9 @@
  var APIKey = "8bf86a426ab2a44eddf367d412a04ad4";
  //use this one for the weather forcast 
 
-// var queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}`
-// console.log(queryURL);
+ var queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}`
+ console.log(queryURL);
 
-
-
- // use this one for long and lat to create the UV index call
-//  var queryURL2 = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`
-//  console.log(queryURL2);
-//  $.ajax({
-//     url: queryURL2,
-//     method: "GET"
-//   }).then(function (response) {
-
-//     var longitude = response.coord.lon
-//     var latitude = response.coord.lat 
-//     $("#UV-index").empty()
-//     var uvURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${APIKey}&lat=${latitude}&lon=${longitude}`
-//     $.ajax({
-//       url: uvURL,
-//       method: "GET"
-//     }).then(function (response) 
-//       console.log(response)
-//   }
 
 //   $("#form").on('submit', function (e) {
 //     e.preventDefault();
@@ -64,4 +44,14 @@
   
       var longitude = response.coord.lon
       var latitude = response.coord.lat
-  console.log(latitude, longitude)})
+  console.log(latitude, longitude)
+
+
+var UVqueryURL = `http://api.openweathermap.org/data/2.5/uvi?lat=${latitude}&lon=${longitude}&appid=${APIKey}`
+$.ajax({
+    url: UVqueryURL,
+    method: "GET"
+  }).then(function (response) {
+     // response from UV api call but how do i make that a UV reading ?
+    console.log(response)})
+})
