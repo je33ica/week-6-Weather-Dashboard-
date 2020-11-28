@@ -1,23 +1,11 @@
 
 // A weather dashboard that will run in the browser, feature dynamically updated HTML and CSS.
 // Use `localStorage` to store any persistent data.
-
 // a user can serach for a city, it will be saved to local storage
 // displayed on the window for user to access again 
 
-//variables that will may be needed
- var currentCitySearch
- var previousCitySearch // to be set to history
- var currentDate
- //var iconOfWeather
- //var temperature
- //var humidity
- //var windSpeed
- var UVindex
  var city = "london"  //"" hardcoding for now to continue to check
- var APIKey = "8bf86a426ab2a44eddf367d412a04ad4";
- 
-
+ var APIKey = "0234a5db053f0c8c1789c2487e8d0de2" //<--random key on net "8bf86a426ab2a44eddf367d412a04ad4"; <--my key
 
 //   $("#form").on('submit', function (e) {
 //     e.preventDefault();
@@ -28,16 +16,15 @@
       url: queryURL,
       method: "GET"
     }).then(function (response) {
-  // need long and lat to make UV api call
       var longitude = response.coord.lon
       var latitude = response.coord.lat
   console.log(latitude, longitude)
+  //*****Ask colum how i can make them golbal variables for long/latitude */
 
 
+  
 //use this one for the current and 5 day weather forcast 
- //var forcastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`
- //var forcastURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=metric`
- var forcastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely
+var forcastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely
 ,hourly,alerts&appid=${APIKey}&units=metric`
  $.ajax({
   url: forcastURL,
@@ -80,18 +67,26 @@
   console.log('I am the UV index '+ UVindex);
 } )
 
-//need to figure out how to extract 5 dyas from data without repeating code- use for loop
-// use other API call!
-// var fiveDayForcastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`
 
-//   for (var i = 1; 1 < 6; i++) {
-//       $.ajax({
-//       url: fiveDayForcastURL,
-//       method: "GET"
-//       }).then(function (response5days) {
-//         var fiveDate = $("#date1").text(moment.unix(response5days.dail))
+//need to figure out how to extract 5 days from data without repeating code- use for loop
 
-//       }}
+var fiveDayURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely
+,hourly,alerts&appid=${APIKey}&units=metric`
 
-//this closes the loop that started at lang/lon
+  for (var i = 1; 1 < 6; i++) 
+      $.ajax({
+        url: fiveDayURL,
+        method: "GET"
+      }).then(function (response5days) {
+        console.log(response5days);
+      
+
+      var forcastTemp = response5days.daily[i].temp.day
+     // var forcastWind = response5days.daily[i].wind_speed
+     // var forcastHumidity = response5days.daily[i].humidity
+      console.log("i am the5d temp " + forcastTemp + "°celsius" );
+        
+    })
+
+      
 });
