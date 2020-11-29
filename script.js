@@ -6,9 +6,12 @@ $(document).ready(function () {
     searchWeather(searched);
   });
 
-  var APIKey = "8bf86a426ab2a44eddf367d412a04ad4";
-
+var APIKey = "8bf86a426ab2a44eddf367d412a04ad4";
+ 
+  var longitude = "";
+  var latitude = "";
   function searchWeather(city) {
+
     var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
     $.ajax({
       url: queryURL,
@@ -19,10 +22,9 @@ $(document).ready(function () {
           previousSearch.push(city);
           localStorage.setItem("cities", JSON.stringify(previousSearch));
         }
-        var longitude = response.coord.lon;
-        var latitude = response.coord.lat;
-
-        getUvIndex(latitude, longitude);
+        longitude = response.coord.lon;
+        latitude = response.coord.lat;
+       
         getForecast(city);
         displaySearch(previousSearch);
         get5day(city);
@@ -30,9 +32,12 @@ $(document).ready(function () {
       },
     });
   }
-  //  var cityName = response.
-  function displaySearch(citiesArr) {
+  
+
+   //clear previous day display 
+   function displaySearch(citiesArr) {
     $("#list").empty();
+   
     for (var i = 0; i < citiesArr.length; i++) {
       $("#list").append($("<li>").text(citiesArr[i]));
     }
@@ -42,35 +47,11 @@ $(document).ready(function () {
   });
 
   //UV
-  function getUvIndex(latitude, longitude) {
-    var getUvUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${APIKey}&lat=${latitude}&lon=${longitude}`;
-    $.ajax({
-      url: getUvUrl,
-      method: "GET",
-      success: function (response) {
-        var uvResponse = response.value;
-        var uvEl = $("<p>").text("UV: hello " + uvResponse);
-        // change color depending on uv value
-        if (uvResponse < 3) {
-          $("#icon").removeClass();
-          $("#uv-index").addClass("badge badge-success");
-        }
-        if (uvResponse > 3 && uvResponse < 7) {
-          $("#uv-index").removeClass();
-          $("#uv-index").addClass("badge badge-warning");
-        }
-        if (uvResponse > 7) {
-          $("#uv-index").removeClass();
-          $("#uv-index").addClass("badge badge-danger");
-        }
-        console.log(uvEl, uvResponse);
-        $(".city-div").append(uvEl);
-      },
-    });
-  }
+  
 
   // current Day
   function getForecast(city) {
+    getUvIndex(latitude, longitude);
     var forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
     $.ajax({
       url: forecastUrl,
@@ -105,8 +86,38 @@ $(document).ready(function () {
           currentHumidity,
           icon
         );
+        
+      },
+      
+    });
+
+    
+    function getUvIndex(latitude, longitude) {
+    var getUvUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${APIKey}&lat=${latitude}&lon=${longitude}`;
+    $.ajax({
+      url: getUvUrl,
+      method: "GET",
+      success: function (response) {
+        var uvResponse = response.value;
+        var uvEl = $("<p>").text("UV: hello " + uvResponse);
+        // change color depending on uv value
+        if (uvResponse < 3) {
+          $("#icon").removeClass();
+          $("#uv-index").addClass("badge badge-success");
+        }
+        if (uvResponse > 3 && uvResponse < 7) {
+          $("#uv-index").removeClass();
+          $("#uv-index").addClass("badge badge-warning");
+        }
+        if (uvResponse > 7) {
+          $("#uv-index").removeClass();
+          $("#uv-index").addClass("badge badge-danger");
+        }
+        console.log(uvEl, uvResponse);
+        $(".city-div").append(uvEl);
       },
     });
+  }
   }
 
   //5day
@@ -115,7 +126,9 @@ $(document).ready(function () {
     $.ajax({
       url: day5URL,
       type: "GET",
-      success: function (data) {
+      success: function (data)
+       {
+        $(".forcast-box #box1").empty();
         console.log("i am the data" + data);
         //day1
         var day1W = $("<p>").text(
@@ -207,6 +220,7 @@ $(document).ready(function () {
           `http://openweathermap.org/img/w/${data.list[7].weather[0].icon}.png`
         );
         $(".forecast-box #date5").append(day5W, day5T, day5WS, day5H, icon5);
+        
       },
     });
   }
@@ -215,6 +229,7 @@ $(document).ready(function () {
 
   displaySearch(previousSearch);
 });
+
 // for (let i = 0; i < data.list.length; i++) {
 //   if (data.list[i].dt_txt.indexOf("15:00:00") !== -1)
 //    var fiveDayTemp = $("<p>").text("Temp: " + data.list[i].main.temp + "°");
