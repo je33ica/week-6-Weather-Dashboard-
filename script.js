@@ -2,7 +2,6 @@ $(document).ready(function () {
   $("#search-button").on("click", function () {
     var searched = $("#city-input").val();
     $("city-input").val("");
-    console.log(searched);
     searchWeather(searched);
   });
 
@@ -27,22 +26,22 @@ $(document).ready(function () {
         getForecast(city);
         displaySearch(previousSearch);
         get5day(city);
-        console.log(response);
       },
     });
   }
 
-  //clear previous day display
+  //clear previous 'day' display
   function displaySearch(citiesArr) {
     $("#list").empty();
-    $
-
+  
+ 
     for (var i = 0; i < citiesArr.length; i++) {
       $("#list").append($("<li>").text(citiesArr[i]));
     }
   }
   $("#list").on("click", "li", function () {
     searchWeather($(this).text());
+    
   });
 
   // current Day
@@ -51,10 +50,15 @@ $(document).ready(function () {
     $.ajax({
       url: forecastUrl,
       method: "GET",
+      statusCode: {
+        404: function() {
+            $(".currentcity").hide();
+            alert("Sorry! City" + searchCity+" not found");
+        }
+    },
       success: function (response) {
         $(".city-div").empty();
-        console.log("forecast", response);
-
+    
         var currentCity = $("<h3>").text(response.city.name);
         var currentTemp = $("<h4>").text(
           "Weather: " + response.list[0].main.temp + "°celsius"
@@ -106,8 +110,6 @@ $(document).ready(function () {
           } else {
             uvEl.addClass("extreme-high-uv");
           }
-
-          console.log(uvEl, uvResponse);
           $(".city-div").append(uvEl);
         },
       });
@@ -115,13 +117,18 @@ $(document).ready(function () {
   }
 
   //5day
+  
+
+
   function get5day(city) {
     var day5URL = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
     $.ajax({
       url: day5URL,
       type: "GET",
       success: function (data) {
-        console.log("i am the data" + data);
+
+
+      //  $(".forecast-box #date1, #date2, #date3, #date4, #date5, ").empty();
         //day1
         var day1W = $("<p>").text(
           "Weather : " + data.list[7].weather[0].description
@@ -213,6 +220,7 @@ $(document).ready(function () {
         );
         $(".forecast-box #date5").append(day5W, day5T, day5WS, day5H, icon5);
       },
+      
     });
   }
 
@@ -220,16 +228,13 @@ $(document).ready(function () {
 
   displaySearch(previousSearch);
 });
-
+// code i want to work on****** i want to creat a for loop for 5 days
 // for (let i = 0; i < data.list.length; i++) {
 //   if (data.list[i].dt_txt.indexOf("15:00:00") !== -1)
 //    var fiveDayTemp = $("<p>").text("Temp: " + data.list[i].main.temp + "°");
 //    fiveDayTemp.attr("id", "#fiveDayTemp[i]");
-
-// console.log(fiveDayTemp);} }
 // let fiveHumidity = $("<p>").attr("id", "humDay").text("Humidity: " + JSON.stringify(response5Day.daily[i].humidity) + "%");
 // fiveHumidity.attr("id", "#fiveHumidity[i]");
-
 // let iconCode = response5Day.daily[i].weather[0].icon;
 // let iconURL = "https://openweathermap.org/img/w/" + iconCode + ".png";
 // let weatherImgDay = $("<img>").attr("src", iconURL);
