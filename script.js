@@ -33,7 +33,6 @@ $(document).ready(function () {
   //clear previous 'day' display
   function displaySearch(citiesArr) {
     $("#list").empty();
-  
  
     for (var i = 0; i < citiesArr.length; i++) {
       $("#list").append($("<li>").text(citiesArr[i]));
@@ -76,7 +75,7 @@ $(document).ready(function () {
           "src",
           `http://openweathermap.org/img/w/${response.list[0].weather[0].icon}.png`
         );
-
+         // icon.addClass(weather)
         $(".city-div").append(
           currentCity,
           currentWeather,
@@ -96,7 +95,7 @@ $(document).ready(function () {
         method: "GET",
         success: function (response) {
           var uvResponse = response.value;
-          var uvEl = $("<p>").text("UV: " + uvResponse);
+          var uvEl = $("<h4>").text("UV: " + uvResponse);
           uvEl.addClass("uv");
           // change color depending on uv value
           if (uvResponse <= 2) {
@@ -126,9 +125,8 @@ $(document).ready(function () {
       url: day5URL,
       type: "GET",
       success: function (data) {
-
-
-      //  $(".forecast-box #date1, #date2, #date3, #date4, #date5, ").empty();
+      //  #date1, #date2, #date3, #date4, #date5,
+     
         //day1
         var day1W = $("<p>").text(
           "Weather : " + data.list[7].weather[0].description
@@ -146,7 +144,7 @@ $(document).ready(function () {
           "src",
           `http://openweathermap.org/img/w/${data.list[7].weather[0].icon}.png`
         );
-        $(".forecast-box #date1").append(day1W, day1T, day1WS, day1H, icon1);
+        $(".forecast-div #date1").append(day1W, day1T, day1WS, day1H, icon1);
         //day2
         var day2W = $("<p>").text(
           "Weather: " + data.list[15].weather[0].description
@@ -164,7 +162,7 @@ $(document).ready(function () {
           "src",
           `http://openweathermap.org/img/w/${data.list[7].weather[0].icon}.png`
         );
-        $(".forecast-box #date2").append(day2W, day2T, day2WS, day2H, icon2);
+        $(".forecast-div #date2").append(day2W, day2T, day2WS, day2H, icon2);
         //day3
         var day3W = $("<p>").text(
           "Weather: " + data.list[23].weather[0].description
@@ -182,7 +180,7 @@ $(document).ready(function () {
           "src",
           `http://openweathermap.org/img/w/${data.list[7].weather[0].icon}.png`
         );
-        $(".forecast-box #date3").append(day3W, day3T, day3WS, day3H, icon3);
+        $(".forecast-div #date3").append(day3W, day3T, day3WS, day3H, icon3);
         //day4
         var day4W = $("<p>").text(
           "Weather: " + data.list[31].weather[0].description
@@ -200,7 +198,7 @@ $(document).ready(function () {
           "src",
           `http://openweathermap.org/img/w/${data.list[7].weather[0].icon}.png`
         );
-        $(".forecast-box #date4").append(day4W, day4T, day4WS, day4H, icon4);
+        $(".forecast-div #date4").append(day4W, day4T, day4WS, day4H, icon4);
         //day5
         var day5W = $("<p>").text(
           "Weather: " + data.list[39].weather[0].description
@@ -218,7 +216,7 @@ $(document).ready(function () {
           "src",
           `http://openweathermap.org/img/w/${data.list[7].weather[0].icon}.png`
         );
-        $(".forecast-box #date5").append(day5W, day5T, day5WS, day5H, icon5);
+        $(".forecast-div #date5").append(day5W, day5T, day5WS, day5H, icon5);
       },
       
     });
