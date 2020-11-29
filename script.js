@@ -6,12 +6,11 @@ $(document).ready(function () {
     searchWeather(searched);
   });
 
-var APIKey = "8bf86a426ab2a44eddf367d412a04ad4";
- 
+  var APIKey = "8bf86a426ab2a44eddf367d412a04ad4";
+
   var longitude = "";
   var latitude = "";
   function searchWeather(city) {
-
     var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
     $.ajax({
       url: queryURL,
@@ -24,7 +23,7 @@ var APIKey = "8bf86a426ab2a44eddf367d412a04ad4";
         }
         longitude = response.coord.lon;
         latitude = response.coord.lat;
-       
+
         getForecast(city);
         displaySearch(previousSearch);
         get5day(city);
@@ -32,12 +31,12 @@ var APIKey = "8bf86a426ab2a44eddf367d412a04ad4";
       },
     });
   }
-  
 
-   //clear previous day display 
-   function displaySearch(citiesArr) {
+  //clear previous day display
+  function displaySearch(citiesArr) {
     $("#list").empty();
-   
+    $
+
     for (var i = 0; i < citiesArr.length; i++) {
       $("#list").append($("<li>").text(citiesArr[i]));
     }
@@ -46,12 +45,8 @@ var APIKey = "8bf86a426ab2a44eddf367d412a04ad4";
     searchWeather($(this).text());
   });
 
-  //UV
-  
-
   // current Day
   function getForecast(city) {
-    getUvIndex(latitude, longitude);
     var forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
     $.ajax({
       url: forecastUrl,
@@ -86,38 +81,37 @@ var APIKey = "8bf86a426ab2a44eddf367d412a04ad4";
           currentHumidity,
           icon
         );
-        
+        getUvIndex(latitude, longitude);
       },
-      
     });
 
-    
     function getUvIndex(latitude, longitude) {
-    var getUvUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${APIKey}&lat=${latitude}&lon=${longitude}`;
-    $.ajax({
-      url: getUvUrl,
-      method: "GET",
-      success: function (response) {
-        var uvResponse = response.value;
-        var uvEl = $("<p>").text("UV: hello " + uvResponse);
-        // change color depending on uv value
-        if (uvResponse < 3) {
-          $("#icon").removeClass();
-          $("#uv-index").addClass("badge badge-success");
-        }
-        if (uvResponse > 3 && uvResponse < 7) {
-          $("#uv-index").removeClass();
-          $("#uv-index").addClass("badge badge-warning");
-        }
-        if (uvResponse > 7) {
-          $("#uv-index").removeClass();
-          $("#uv-index").addClass("badge badge-danger");
-        }
-        console.log(uvEl, uvResponse);
-        $(".city-div").append(uvEl);
-      },
-    });
-  }
+      var getUvUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${APIKey}&lat=${latitude}&lon=${longitude}`;
+      $.ajax({
+        url: getUvUrl,
+        method: "GET",
+        success: function (response) {
+          var uvResponse = response.value;
+          var uvEl = $("<p>").text("UV: " + uvResponse);
+          uvEl.addClass("uv");
+          // change color depending on uv value
+          if (uvResponse <= 2) {
+            uvEl.addClass("low-uv");
+          } else if (uvResponse < 5) {
+            uvEl.addClass("moderate-uv");
+          } else if (uvResponse < 7) {
+            uvEl.addClass("high-uv");
+          } else if (uvResponse < 10) {
+            uvEl.addClass("very-high-uv");
+          } else {
+            uvEl.addClass("extreme-high-uv");
+          }
+
+          console.log(uvEl, uvResponse);
+          $(".city-div").append(uvEl);
+        },
+      });
+    }
   }
 
   //5day
@@ -126,9 +120,7 @@ var APIKey = "8bf86a426ab2a44eddf367d412a04ad4";
     $.ajax({
       url: day5URL,
       type: "GET",
-      success: function (data)
-       {
-        $(".forcast-box #box1").empty();
+      success: function (data) {
         console.log("i am the data" + data);
         //day1
         var day1W = $("<p>").text(
@@ -220,7 +212,6 @@ var APIKey = "8bf86a426ab2a44eddf367d412a04ad4";
           `http://openweathermap.org/img/w/${data.list[7].weather[0].icon}.png`
         );
         $(".forecast-box #date5").append(day5W, day5T, day5WS, day5H, icon5);
-        
       },
     });
   }
