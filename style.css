@@ -1,9 +1,36 @@
+#bg {
+    position: fixed; 
+    top: -50%; 
+    left: -50%; 
+    width: 200%; 
+    height: 200%;
+  }
+  #bg img {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    margin: auto; 
+    min-width: 50%;
+    min-height: 50%;
+  }
+
+
+  body {
+    background-color: rgb(9, 4, 31);
+    background-image: url('cloud.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+}
 #header {
     width: 100%;
     background-color: rgba(85, 85, 85, 0.158);
     height: 100px;
     border-radius: 2.5rem;
-    
+    margin: 2%;
     color: white;
 }
 #header-text {
@@ -40,7 +67,7 @@ p {
 
     height: fit-content;
     float: right;    
-    width: inherit;
+   
     padding: 40px auto 0 auto;
     border-radius: 10px;
     display: flex;
@@ -64,7 +91,7 @@ p {
     
 }
 li {
-   
+    list-style-type: none;
     border: 1px solid rgba(112, 112, 112, 0.315);
     width: fit-content;
     height: 90%;
@@ -86,3 +113,36 @@ li {
         border-color: #d1e3fc;
         border-radius: 10px;
     }
+
+.uv{
+    width: 20%;
+    height: fit-content;
+    border: none;
+    border-radius: 6px;
+    padding: 4px;
+   
+    margin-left: auto;
+    margin-right: auto;
+    left: 0vw;
+    right: 0vw;
+    text-align: center;
+    bottom: -10vh;
+}
+    .low-uv{
+        
+        background-color: #2ecc71;
+    }
+    
+    .moderate-uv{
+        background-color: #f1c40f;
+    }
+    
+    .high-uv{
+        background-color: #f31212;
+    }
+    
+    .extreme-high-uv{
+        background-color: #7805bb;
+    }
+    
+   

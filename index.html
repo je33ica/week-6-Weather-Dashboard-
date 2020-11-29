@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+> 
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,20 +11,19 @@
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
       crossorigin="anonymous"
     />
+    
     <title>Document</title>
   </head>
+ 
   <body>
-    <div class="container">
-      <!-- Content here -->
+    
+   
       <div class="container" id="main-container">
-        <style>
-          body {
-            background-image: url("cloud.jpg");
-          }
-        </style>
+       
         <div class="container" id="header">
           <p id="header-text">Weather Dashboard</p>
         </div>
+        
         <div class="row" id="main-row">
           <aside
             class="col-xs-12 col-sm-12 col-md-12 col-lg-3"
@@ -31,10 +31,7 @@
           >
             <div class="form-group">
               <input
-                type="text"
-                class="form-control"
-                id="city-input"
-                placeholder="enter City here"
+                type="text" class="form-control"  id="city-input" placeholder="enter City here"
               />
               <button id="search-button" class="btn-primary">search</button>
               <ul id="list" > 
@@ -72,7 +69,8 @@
           </div>
         </div>
       </div>
-    </div>
+   
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="script.js"></script>
