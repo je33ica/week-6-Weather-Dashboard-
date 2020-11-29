@@ -7,7 +7,7 @@
     color: white;
 }
 #header-text {
-    color:rgb(68, 68, 68);
+    color:rgb(0, 46, 119);
     font-size: 32px;
     text-align: center;
     margin: 0 auto;
@@ -15,32 +15,43 @@
     letter-spacing: 5px;
     
 }
+p {
+   
+    margin-bottom: 1rem;
+    text-align: center;
+    text-transform: uppercase;}
+
 .city-div {
     border: 1px solid rgba(112, 112, 112, 0.315);
-    background-color:white;
-    margin: 5%;
-    height: 200px;
-    float: left;    
-    width: 90%;
+    background-color: #ffffffad;
+   
+    height: fit-content;
+    float: right;    
+    width: inherit;
     border-radius: 10px;
     padding: 15px 25px;
     line-height: 12px;
+    color: cornflowerblue;
+    margin-bottom: 5px;
 }
 .forecast-div {
    
-    margin: 5%;
-   background-color:white ;
-    height: 200px;
-    float: left;    
-    width: 90%;
+
+
+    height: fit-content;
+    float: right;    
+    width: inherit;
     padding: 40px auto 0 auto;
     border-radius: 10px;
     display: flex;
     align-content: center;
+    margin-bottom: 20px;
 }
 .forecast-box {
-    width: 120px;
-    height: 140px;
+    width: fit-content;
+    height: fit-content;
+    background-color: #ffffffad;
+    color: cornflowerblue;
     
     float: left;
     border: 1px solid rgba(112, 112, 112, 0.315);
@@ -50,4 +61,28 @@
     display: flex;
     justify-content: center;
     padding: 10px;
+    
 }
+li {
+   
+    border: 1px solid rgba(112, 112, 112, 0.315);
+    width: fit-content;
+    height: 90%;
+    background-color: #00000021;
+    color: rgb(0, 46, 119);
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 2px;   
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+
+    .btn-primary {
+        margin-top: 2px;
+        color: #fff;
+        background-color: #447dce;
+        border-color: #d1e3fc;
+        border-radius: 10px;
+    }
