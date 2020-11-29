@@ -45,16 +45,15 @@ p {
 }
 .forecast-div {
    
-
-
     height: fit-content;
     float: left;    
-   
+   width: ;
     padding: 40px auto 0 auto;
     border-radius: 10px;
     display: flex;
     align-content: center;
     margin-bottom: 20px;
+  
 }
 .forecast-box {
     width: fit-content;

@@ -33,6 +33,7 @@ $(document).ready(function () {
   //clear previous 'day' display
   function displaySearch(citiesArr) {
     $("#list").empty();
+  
  
     for (var i = 0; i < citiesArr.length; i++) {
       $("#list").append($("<li>").text(citiesArr[i]));
@@ -40,6 +41,7 @@ $(document).ready(function () {
   }
   $("#list").on("click", "li", function () {
     searchWeather($(this).text());
+  
     
   });
 
@@ -57,7 +59,7 @@ $(document).ready(function () {
     },
       success: function (response) {
         $(".city-div").empty();
-    
+       
         var currentCity = $("<h3>").text(response.city.name);
         var currentTemp = $("<h4>").text(
           "Weather: " + response.list[0].main.temp + "°celsius"
@@ -75,7 +77,7 @@ $(document).ready(function () {
           "src",
           `http://openweathermap.org/img/w/${response.list[0].weather[0].icon}.png`
         );
-         // icon.addClass(weather)
+         icon.addClass("weather-icon")
         $(".city-div").append(
           currentCity,
           currentWeather,
@@ -117,7 +119,11 @@ $(document).ready(function () {
 
   //5day
   
-
+  $(".forecast-div #date1").append($("<p>").text("Day 1"))
+  $(".forecast-div #date2").append($("<p>").text("Day 2"))
+  $(".forecast-div #date3").append($("<p>").text("Day 3"))
+  $(".forecast-div #date4").append($("<p>").text("Day 4"))
+  $(".forecast-div #date5").append($("<p>").text("Day 5"))
 
   function get5day(city) {
     var day5URL = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
@@ -125,8 +131,7 @@ $(document).ready(function () {
       url: day5URL,
       type: "GET",
       success: function (data) {
-      //  #date1, #date2, #date3, #date4, #date5,
-     
+       
         //day1
         var day1W = $("<p>").text(
           "Weather : " + data.list[7].weather[0].description
