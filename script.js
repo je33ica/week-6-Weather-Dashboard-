@@ -51,7 +51,7 @@ $(document).ready(function () {
 
   // current Day
   function getForecast(city) {
-    var forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
+    var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
     $.ajax({
       url: forecastUrl,
       method: "GET",
@@ -74,7 +74,7 @@ $(document).ready(function () {
         );
         var icon = $("<img>").attr(
           "src",
-          `http://openweathermap.org/img/w/${response.list[0].weather[0].icon}.png`
+          `https://openweathermap.org/img/w/${response.list[0].weather[0].icon}.png`
         );
         icon.addClass("weather-icon");
         $(".city-div").append(
@@ -90,7 +90,7 @@ $(document).ready(function () {
     });
 
     function getUvIndex(latitude, longitude) {
-      var getUvUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=${APIKey}&lat=${latitude}&lon=${longitude}`;
+      var getUvUrl = `https://api.openweathermap.org/data/2.5/uvi?appid=${APIKey}&lat=${latitude}&lon=${longitude}`;
       $.ajax({
         url: getUvUrl,
         method: "GET",
@@ -125,7 +125,7 @@ $(document).ready(function () {
   $(".forecast-div #date5").append($("<p>").text("Day 5"));
 
   function get5day(city) {
-    var day5URL = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
+    var day5URL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
     $.ajax({
       url: day5URL,
       type: "GET",
