@@ -71,7 +71,7 @@ p {
 li {
   list-style-type: none;
   border: 1px solid rgba(112, 112, 112, 0.315);
-  width: fit-content;
+  
   height: 90%;
   background-color: #00000021;
   color: rgb(0, 46, 119);
